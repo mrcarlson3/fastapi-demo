@@ -27,3 +27,9 @@ async def get_data():
         "animal" : "Penguin"
     }
     return example_data
+@app.get("/story")
+async def get_story():
+    storytime = {
+        "story": "There once was a lad, that's it that the story :)"
+    }
+    return storytime
