@@ -19,3 +19,11 @@ def add(a: int, b: int):
 @app.get("/multiply/{c}/{d}")
 def multiply(c: int, d: int):
     return {"product": c * d}
+@app.get("/data")
+async def get_data():
+    example_data = {
+        "id" : 1,
+        "name" : "Pesto",
+        "animal" : "Penguin"
+    }
+    return example_data
