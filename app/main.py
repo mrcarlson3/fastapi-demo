@@ -5,6 +5,13 @@ from typing import Optional
 from pydantic import BaseModel
 import json
 import os
+import mysql.connector
+from mysql.connector import Error
+
+DBHOST = "ds2022.cqee4iwdcaph.us-east-1.rds.amazonaws.com"
+DBUSER = "admin"
+DBPASS = os.getenv('DBPASS')
+DB = "mjy7nw"
 
 app = FastAPI()
 
@@ -33,3 +40,19 @@ async def get_story():
         "story": "There once was a lad, that's it that the story :)"
     }
     return storytime
+
+@app.get('/genres')
+def get_genres():
+    query = "SELECT * FROM genres ORDER BY genreid;"
+    try:    
+        cur.execute(query)
+        headers=[x[0] for x in cur.description]
+        results = cur.fetchall()
+        json_data=[]
+        for result in results:
+            json_data.append(dict(zip(headers,result)))
+        return(json_data)
+    except Error as e:
+        print("MySQL Error: ", str(e))
+        return {"Error": "MySQL Error: " + str(e)}
+    
