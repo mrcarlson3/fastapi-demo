@@ -8,10 +8,14 @@ import os
 import mysql.connector
 from mysql.connector import Error
 
+
 DBHOST = "ds2022.cqee4iwdcaph.us-east-1.rds.amazonaws.com"
 DBUSER = "admin"
 DBPASS = os.getenv('DBPASS')
 DB = "mjy7nw"
+
+db = mysql.connector.connect(user=DBUSER, host=DBHOST, password=DBPASS, database=DB)
+cur=db.cursor()
 
 app = FastAPI()
 
@@ -26,6 +30,7 @@ def add(a: int, b: int):
 @app.get("/multiply/{c}/{d}")
 def multiply(c: int, d: int):
     return {"product": c * d}
+
 @app.get("/data")
 async def get_data():
     example_data = {
@@ -34,6 +39,7 @@ async def get_data():
         "animal" : "Penguin"
     }
     return example_data
+
 @app.get("/story")
 async def get_story():
     storytime = {
@@ -41,7 +47,10 @@ async def get_story():
     }
     return storytime
 
-@app.get('/genres')
+
+#get methods for Spotify
+ 
+'''@app.get('/genres')
 def get_genres():
     query = "SELECT * FROM genres ORDER BY genreid;"
     try:    
@@ -55,4 +64,4 @@ def get_genres():
     except Error as e:
         print("MySQL Error: ", str(e))
         return {"Error": "MySQL Error: " + str(e)}
-    
+    '''
