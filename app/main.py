@@ -50,7 +50,7 @@ async def get_story():
 
 #get methods for Spotify
  
-'''@app.get('/genres')
+@app.get('/genres')
 def get_genres():
     query = "SELECT * FROM genres ORDER BY genreid;"
     try:    
@@ -64,4 +64,3 @@ def get_genres():
     except Error as e:
         print("MySQL Error: ", str(e))
         return {"Error": "MySQL Error: " + str(e)}
-    '''
