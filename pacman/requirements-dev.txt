@@ -1,0 +1,4 @@
+chalice
+pytest
+mysql-connector-python
+boto3

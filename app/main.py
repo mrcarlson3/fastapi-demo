@@ -7,7 +7,7 @@ import json
 import os
 import mysql.connector
 from mysql.connector import Error
-
+from fastapi.middleware.cors import CORSMiddleware
 
 DBHOST = "ds2022.cqee4iwdcaph.us-east-1.rds.amazonaws.com"
 DBUSER = "admin"
@@ -19,6 +19,13 @@ cur=db.cursor()
 
 app = FastAPI()
 
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins= ['*'],
+    allow_methods= ['*'],
+    allow_headers= ['*']
+)
 @app.get("/")  # zone apex
 def zone_apex():
     return {"Greetings": "Breadloaf"}
@@ -54,6 +61,21 @@ async def get_story():
 def get_genres():
     query = "SELECT * FROM genres ORDER BY genreid;"
     try:    
+        cur.execute(query)
+        headers=[x[0] for x in cur.description]
+        results = cur.fetchall()
+        json_data=[]
+        for result in results:
+            json_data.append(dict(zip(headers,result)))
+        return(json_data)
+    except Error as e:
+        print("MySQL Error: ", str(e))
+        return {"Error": "MySQL Error: " + str(e)}
+
+@app.get('/songs')
+def get_songs():
+    query = "Select * From songs ORDER BY id;"
+    try:
         cur.execute(query)
         headers=[x[0] for x in cur.description]
         results = cur.fetchall()
