@@ -5,6 +5,7 @@ from typing import Optional
 from pydantic import BaseModel
 import json
 import os
+import mysql
 import mysql.connector
 from mysql.connector import Error
 from fastapi.middleware.cors import CORSMiddleware
