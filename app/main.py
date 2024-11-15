@@ -11,7 +11,7 @@ from mysql.connector import Error
 from fastapi.middleware.cors import CORSMiddleware
 
 DBHOST = "ds2022.cqee4iwdcaph.us-east-1.rds.amazonaws.com"
-DBUSER = "admin"
+DBUSER = "ds2022"
 DBPASS = os.getenv('DBPASS')
 DB = "mjy7nw"
 
