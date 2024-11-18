@@ -1,0 +1,23 @@
+{
+  "resources": [
+    {
+      "name": "default-role",
+      "resource_type": "iam_role",
+      "role_arn": "arn:aws:iam::980921746152:role/pacman-dev",
+      "role_name": "pacman-dev"
+    },
+    {
+      "name": "s3_handler",
+      "resource_type": "lambda_function",
+      "lambda_arn": "arn:aws:lambda:us-east-1:980921746152:function:pacman-dev-s3_handler"
+    },
+    {
+      "name": "s3_handler-s3event",
+      "resource_type": "s3_event",
+      "bucket": "mjy7nw-dp1-spotify",
+      "lambda_arn": "arn:aws:lambda:us-east-1:980921746152:function:pacman-dev-s3_handler"
+    }
+  ],
+  "schema_version": "2.0",
+  "backend": "api"
+}
