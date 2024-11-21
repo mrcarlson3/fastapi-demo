@@ -15,9 +15,6 @@ DBUSER = "ds2022"
 DBPASS = os.getenv('DBPASS')
 DB = "mjy7nw"
 
-db = mysql.connector.connect(user=DBUSER, host=DBHOST, password=DBPASS, database=DB)
-cur=db.cursor()
-
 app = FastAPI()
 
 
