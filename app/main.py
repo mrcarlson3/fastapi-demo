@@ -60,6 +60,8 @@ async def get_story():
  
 @app.get('/genres')
 def get_genres():
+    db = mysql.connector.connect(user=DBUSER, host=DBHOST, password=DBPASS, database=DB)
+    cur=db.cursor()
     query = "SELECT * FROM genres ORDER BY genreid;"
     try:    
         cur.execute(query)
@@ -72,9 +74,14 @@ def get_genres():
     except Error as e:
         print("MySQL Error: ", str(e))
         return {"Error": "MySQL Error: " + str(e)}
+    finally:
+        cur.close()
+        db.close()
 
 @app.get('/songs')
 def get_songs():
+    db = mysql.connector.connect(user=DBUSER, host=DBHOST, password=DBPASS, database=DB)
+    cur=db.cursor()
     query = "Select * From songs ORDER BY id;"
     try:
         cur.execute(query)
@@ -87,3 +94,6 @@ def get_songs():
     except Error as e:
         print("MySQL Error: ", str(e))
         return {"Error": "MySQL Error: " + str(e)}
+    finally:
+        cur.close()
+        db.close()
